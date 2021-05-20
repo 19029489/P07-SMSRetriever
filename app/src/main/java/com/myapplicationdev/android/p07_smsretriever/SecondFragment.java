@@ -53,9 +53,16 @@ public class SecondFragment extends Fragment {
                 String[] reqCols = new String[]{"date", "address", "body", "type"};
                 ContentResolver cr = getContext().getContentResolver();
 
+                String data = etSMS.getText().toString() + " ";
+                String[] splitedArray = data.split(" ");
                 String filter = "body LIKE ?";
-                String data = etSMS.getText().toString();
-                String[] filterArgs = {"%" + data + "%"};
+                String[] filterArgs = new String[splitedArray.length];
+                for (int i = 1; i < splitedArray.length; i++){
+                    filter += " OR body LIKE ?";
+                }
+                for (int o = 0; o < splitedArray.length; o++){
+                    filterArgs[o] = "%" + splitedArray[o] + "%";
+                }
 
                 Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
                 String smsBody = "";
@@ -75,7 +82,8 @@ public class SecondFragment extends Fragment {
                         smsBody += type + " " + address + "\n at " + date
                                 + "\n\"" + body + "\"\n\n";
                     } while (cursor.moveToNext());
-                }tvSMS.setText(smsBody);
+                }
+                tvSMS.setText(smsBody);
             }
         });
         return view;
