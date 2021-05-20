@@ -85,10 +85,10 @@ public class FirstFragment extends Fragment {
         btnRetrieveNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int permissionCheck = PermissionChecker.checkSelfPermission(MainActivity.this, Manifest.permission.READ_SMS);
+                int permissionCheck = PermissionChecker.checkSelfPermission(getContext(), Manifest.permission.READ_SMS);
 
                 if (permissionCheck != PermissionChecker.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_SMS},0);
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_SMS},0);
                     //stops the action from proceeding further as permission not
                     //granted yet
                     return;
@@ -106,7 +106,7 @@ public class FirstFragment extends Fragment {
 
                 //Get Content Resolver object from which to
                 //query the content provider
-                ContentResolver cr = getContentResolver();
+                ContentResolver cr = getActivity().getContentResolver();
 
                 //The filter String
                 String filter = "address LIKE ? ";
