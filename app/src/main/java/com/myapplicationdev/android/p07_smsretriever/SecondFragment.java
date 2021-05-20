@@ -36,6 +36,7 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String data = etSMS.getText().toString();
+                tvSMS.setText(data);
 
             }
         });
