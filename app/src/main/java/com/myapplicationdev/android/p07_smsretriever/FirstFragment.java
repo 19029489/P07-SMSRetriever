@@ -2,6 +2,7 @@ package com.myapplicationdev.android.p07_smsretriever;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -29,7 +30,7 @@ import android.widget.Toast;
  */
 public class FirstFragment extends Fragment {
 
-    Button btnRetrieveNum;
+    Button btnRetrieveNum, btnSendEmail;
     TextView tvSMSNum;
     EditText etNum;
 
@@ -81,6 +82,7 @@ public class FirstFragment extends Fragment {
         tvSMSNum = view.findViewById(R.id.tvSMSNum);
         btnRetrieveNum = view.findViewById(R.id.btnRetSMSNum);
         etNum = view.findViewById(R.id.etNum);
+        btnSendEmail = view.findViewById(R.id.btnSendEmail);
 
         btnRetrieveNum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +136,51 @@ public class FirstFragment extends Fragment {
                     } while (cursor.moveToNext());
                 }
                 tvSMSNum.setText(smsBody);
+            }
+        });
+
+        btnSendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Uri uri = Uri.parse("content://sms");
+
+                String[] reqCols = new String[]{"body"};
+
+                ContentResolver cr = getActivity().getContentResolver();
+
+                //The filter String
+                String filter = "address LIKE ? ";
+                //The matches for the ?
+                String num = etNum.getText().toString();
+                String[] filterArgs = {"%" + num + "%"};
+
+                //Fetch SMS Message from Built-in Content Provider
+                Cursor cursor = cr.query(uri, reqCols, filter, filterArgs,null);
+                String smsBody = "";
+                if (cursor.moveToFirst()) {
+                    do {
+                        String body = cursor.getString(0);
+
+                        smsBody += "" + body + "\n\n";
+                    } while (cursor.moveToNext());
+                }
+                // The action you want this intent to do;
+                // ACTION_SEND is used to indicate sending text
+                Intent email = new Intent(Intent.ACTION_SEND);
+                // Put essentials like email address, subject & body text
+                email.putExtra(Intent.EXTRA_EMAIL,
+                        new String[]{"19029489@myrp.edu.sg"});
+                email.putExtra(Intent.EXTRA_SUBJECT,
+                        "My SMS Content");
+                email.putExtra(Intent.EXTRA_TEXT,
+                        smsBody);
+                // This MIME type indicates email
+                email.setType("message/rfc822");
+                // createChooser shows user a list of app that can handle
+                // this MIME type, which is, email
+                startActivity(Intent.createChooser(email,
+                        "Choose an Email client :"));
             }
         });
 
