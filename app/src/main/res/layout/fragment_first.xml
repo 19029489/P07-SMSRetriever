@@ -3,36 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BBFFFF"
     tools:context=".FirstFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#BBFFFF">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvFrag1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Only SMS containing this number" />
-
-        <EditText
-            android:id="@+id/etNum"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/btnRetSMSNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Retrieve SMS" />
+            <TextView
+                android:id="@+id/tvFrag1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Only SMS containing this number" />
 
-        <TextView
-            android:id="@+id/tvSMSNum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/etNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/btnRetSMSNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retrieve SMS" />
+
+            <TextView
+                android:id="@+id/tvSMSNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </ScrollView>
 
 </FrameLayout>
