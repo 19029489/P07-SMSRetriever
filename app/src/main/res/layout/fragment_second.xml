@@ -1,35 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFDBDB"
-    android:orientation="vertical"
     tools:context=".SecondFragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Only SMS with this word" />
+        android:layout_height="match_parent"
+        android:background="#FFDBDB"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etSMS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"/>
+        <TextView
+            android:id="@+id/tvFrag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A line of text" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Retrieve SMS" />
-
-    <TextView
-        android:id="@+id/tvSMS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-</LinearLayout>
+        <Button
+            android:id="@+id/btnAddTextFrag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Text" />
+    </LinearLayout>
+</FrameLayout>
