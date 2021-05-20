@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#BBFFFF"
-        android:orientation="vertical">
+        android:background="#BBFFFF">
 
         <TextView
             android:id="@+id/tvFrag1"
@@ -33,7 +32,7 @@
         <TextView
             android:id="@+id/tvSMSNum"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content" />
+    </ScrollView>
 
 </FrameLayout>

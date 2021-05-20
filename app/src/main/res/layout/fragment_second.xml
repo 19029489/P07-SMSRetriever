@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#BBFFFF"
-        android:orientation="vertical">
+        android:background="#BBFFFF">
 
         <TextView
             android:id="@+id/tvFrag2"
@@ -35,5 +34,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
-    </LinearLayout>
+    </ScrollView>
 </FrameLayout>
