@@ -41,8 +41,6 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                String data = etSMS.getText().toString();
-
                 int permissionCheck = PermissionChecker.checkSelfPermission(getContext(), Manifest.permission.READ_SMS);
                 if (permissionCheck != PermissionChecker.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(getActivity(),
@@ -56,9 +54,10 @@ public class SecondFragment extends Fragment {
                 ContentResolver cr = getContext().getContentResolver();
 
                 String filter = "body LIKE ?";
-                String[] filterArgs = {"%data%"};
+                String data = etSMS.getText().toString();
+                String[] filterArgs = {"%" + data + "%"};
 
-                Cursor cursor = cr.query(uri, reqCols, null, null, null);
+                Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
                 String smsBody = "";
                 if (cursor.moveToFirst()) {
                     do {
@@ -74,25 +73,28 @@ public class SecondFragment extends Fragment {
                             type = "Sent:";
                         }
                         smsBody += type + " " + address + "\n at " + date
-                                + "\n\"" + body + "\"n\n";
+                                + "\n\"" + body + "\"\n\n";
                     } while (cursor.moveToNext());
                 }tvSMS.setText(smsBody);
             }
         });
         return view;
-
-
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            //permission war granted. yay! Do the read SMS
-            //as if the btnRetrieve is clicked
-            btnRetrieveSMS.performClick();
-        }else{
-            //permission denied... notify user
-            Toast.makeText(getContext(), "Permission not granted", Toast.LENGTH_SHORT).show();
+        switch (requestCode) {
+            case 0: {
+                //If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //permission was granted, yay! Do the read SMS
+                    //as if the btnRetrieve is clicked
+                    btnRetrieveSMS.performClick();
+                } else {
+                    //permission denied... notify user
+                    Toast.makeText(getContext(), "Permission not granted", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 }
