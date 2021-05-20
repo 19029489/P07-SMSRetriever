@@ -25,16 +25,15 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/btnAddTextFrag1"
+            android:id="@+id/btnRetSMSNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Retrieve SMS" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvSMSNum"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </FrameLayout>
